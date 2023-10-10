@@ -1,0 +1,146 @@
+@charset "UTF-8";
+body {
+  font-family: "League Spartan", sans-serif;
+  background-color: #f6f6f6;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+}
+header .header-logo {
+  font-size: 45pt;
+  font-weight: 800;
+  letter-spacing: -4px;
+}
+header .header-nav {
+  display: flex;
+  justify-content: end;
+  font-size: 14pt;
+}
+header .header-nav a {
+  color: black;
+  text-decoration: none;
+}
+header .header-nav a:nth-child(2) {
+  margin: 0 5rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 0;
+}
+main .main-title {
+  font-size: 45pt;
+  font-weight: 800;
+  letter-spacing: -4px;
+  margin-bottom: 2rem;
+}
+main .list-form .list-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 2.3rem 0;
+  width: 20rem;
+}
+main .list-form .list-item .checkbox {
+  cursor: pointer;
+}
+main .list-form .list-item .checkbox span {
+  color: #34495E;
+  padding: 0.5rem 0.25rem;
+}
+main .list-form .list-item .checkbox input {
+  height: 25px;
+  width: 25px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 1px solid #34495E;
+  border-radius: 4px;
+  outline: none;
+  transition-duration: 0.3s;
+  background-color: #41B883;
+  cursor: pointer;
+}
+main .list-form .list-item .checkbox input:checked {
+  border: 1px solid #41B883;
+  background-color: #34495E;
+}
+main .list-form .list-item .checkbox input:checked + span::before {
+  content: "✓";
+  text-align: center;
+  color: #41B883;
+  position: absolute;
+  left: 0.4rem;
+  top: 0.2rem;
+}
+main .list-form .list-item .checkbox input:checked + span::before {
+  content: "✓";
+  text-align: center;
+  color: #41B883;
+  position: absolute;
+  left: 0.4rem;
+  top: 0.2rem;
+}
+main .list-form .list-item .checkbox input:checked ~ .input-text {
+  text-decoration: line-through;
+}
+main .list-form .list-item .label {
+  transition: all 0.2s ease;
+  color: #d3d2d2;
+  position: absolute;
+  top: 2px;
+  left: 45px;
+}
+main .list-form .list-item .label.focused {
+  top: -20px;
+  color: #41B883;
+}
+main .list-form .list-item .input-text {
+  border: none;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-size: 14pt;
+  background-color: transparent;
+  border-bottom: solid 1px;
+  position: absolute;
+  margin-left: 2.7rem;
+  width: 90%;
+}
+main .list-form .list-item .input-text:focus:valid + .label {
+  top: -20px;
+  color: #41B883;
+}
+main .list-form .list-item:hover .label {
+  top: -20px;
+  color: #41B883;
+}
+main .list-form .list-item .text-checked {
+  transition: all 0.6s;
+  text-decoration: line-through;
+}
+main .btn-container {
+  margin-top: 1rem;
+}
+main .btn-container button {
+  border: 0;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  background-color: #181818;
+  color: white;
+  margin: 1rem;
+  transition: 0.3s;
+  box-shadow: #979797 0px 5px 10px 1px;
+}
+main .btn-container button:hover {
+  background-color: #41B883;
+}
