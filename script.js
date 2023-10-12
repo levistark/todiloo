@@ -2,32 +2,36 @@
 const listItems = document.querySelectorAll('.list-item')
 const listForm = document.querySelector('.list-form')
 const itemText = document.querySelector('.input-text')
-
-
+let nextPrioIndex = 0;
+let isPrio = null
 let focusedRow = null
+    
 
-
-// Initial event listeners for existing items
+// Initial EVENT listeners for existing items
 listForm.querySelectorAll('.list-item').forEach((listItem) => {
     const itemText = listItem.querySelector('.input-text')
     const label = listItem.querySelector('.label')
 
+    // FOCUS state listener which controls the CSS classes
     itemText.addEventListener('input', () => {
         if (itemText.value.trim() !== '') {
             label.classList.add('focused')
+
         } else {
             label.classList.remove('focused')
         }
     });
 
-    // Prevent form submission on Enter key press for existing items
+    // Prevent form submission on Enter key press for EXISTING items
     itemText.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault()
+            addRow()
+
         }
     });
 
-    // Set the focused row when clicking on the input field of an existing item
+    // Set the INITIAL focused row when clicking on the input field
     itemText.addEventListener('focus', () => {
         focusedRow = listItem
     });
@@ -36,7 +40,7 @@ listForm.querySelectorAll('.list-item').forEach((listItem) => {
 // Function to add rows
 function addRow() {
     let newItem = document.createElement('div')
-    newItem.className = 'list-item'
+    newItem.className = 'list-item new-item'
     newItem.innerHTML = `
         <label class="checkbox">
             <input type="checkbox" />
@@ -44,37 +48,38 @@ function addRow() {
         </label>
         <input required type="text" class="input-text">
         <label class="label">To-do</label>
+        <button type="button" class="btn-prio" onclick="addPrio(${nextPrioIndex+1})">Prio?</button>
     `
     listForm.appendChild(newItem)
 
-    // Attach the event listener to the newly created item
-    const itemText = newItem.querySelector('.input-text');
-    const label = newItem.querySelector('.label');
+    // Increment the index for the next "Prio?" button
+    nextPrioIndex++
 
-    itemText.addEventListener('input', () => {
-        if (itemText.value.trim() !== '') {
-            label.classList.add('focused');
+    // Attach the FOCUSED event listener to the newly created item to control CSS
+    const newItemText = newItem.querySelector('.input-text');
+    const newLabel = newItem.querySelector('.label');
+
+    newItemText.addEventListener('input', () => {
+        if (newItemText.value.trim() !== '') {
+            newLabel.classList.add('focused');
         } 
         else {
-            label.classList.remove('focused');
+            newLabel.classList.remove('focused');
         }
     });
-
 
     // Add key-press listener to the newly created list item
     newItem.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault()
-            addRow()
-            focusedRow = newItem
+            addRow() 
 
-        } else if(e.key === 'Backspace' && (itemText.value.trim() == '') && focusedRow) {
+        } else if(e.key === 'Backspace' && (newItemText.value.trim() == '') && focusedRow) {
+            e.preventDefault()
             deleteRow()
         }
     });
 
-    // Focus the newly created row
-    newItem.querySelector('.input-text').focus() 
 
     // Add onCheck-listener to the checkbox in the new list item
     const inputTexts = document.querySelectorAll('.list-item input[type="text"]')
@@ -88,7 +93,12 @@ function addRow() {
                 inputTexts[index].classList.remove('text-checked');
             }
         })
+
     })
+
+    // Focus the newly created row
+    newItem.querySelector('.input-text').focus() 
+    focusedRow = newItem
 }
 
 // Function to clear rows
@@ -101,7 +111,7 @@ function clearList() {
 
 function deleteRow() {
     
-    if (listForm.childNodes.length <= 3) {
+    if (listForm.childNodes.length <= 1) {
         listForm.querySelector('.input-text').focus()
     } else {
         focusedRow.remove()
@@ -114,14 +124,6 @@ function deleteRow() {
         }
     }
 }
-
-// Handle key presses
-itemText.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        e.preventDefault()
-        addRow()
-    } 
-});
 
 function onCheck() {
     const inputTexts = document.querySelectorAll('.list-item input[type="text"]')
@@ -137,4 +139,27 @@ function onCheck() {
         })
     })
 
+}
+
+// Modify the "addPrio" function to accept an index parameter
+function addPrio(index) {
+    const prioButtons = document.querySelectorAll('.btn-prio');
+    const checkboxes = document.querySelectorAll('.checkbox');
+
+    if (index >= 0 && index < prioButtons.length) {
+        const clickedButton = prioButtons[index];
+        const checkbox = checkboxes[index];
+
+        if (clickedButton.classList.contains('btn-prio-checked')) {
+            // Element is already marked as priority
+            checkbox.classList.remove('checkbox-prio');
+            clickedButton.classList.remove('btn-prio-checked');
+            clickedButton.textContent = 'Prio?';
+        } else {
+            // Element is not marked as priority
+            checkbox.classList.add('checkbox-prio');
+            clickedButton.classList.add('btn-prio-checked');
+            clickedButton.textContent = 'Prio!';
+        }
+    }
 }

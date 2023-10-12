@@ -27,6 +27,9 @@ header .header-nav a {
 header .header-nav a:nth-child(2) {
   margin: 0 5rem;
 }
+header .header-nav a i {
+  font-size: 16pt;
+}
 
 main {
   display: flex;
@@ -91,6 +94,18 @@ main .list-form .list-item .checkbox input:checked + span::before {
 main .list-form .list-item .checkbox input:checked ~ .input-text {
   text-decoration: line-through;
 }
+main .list-form .list-item .checkbox-prio input {
+  background-color: #b84141;
+  box-shadow: #ef1e1e 0 0 10px;
+  border: 0;
+}
+main .list-form .list-item .checkbox-prio input:checked {
+  border: 1px solid #ff0000;
+  background-color: #5e3434;
+}
+main .list-form .list-item .checkbox-prio input:checked + span::before {
+  color: #ff0000;
+}
 main .list-form .list-item .label {
   transition: all 0.2s ease;
   color: #d3d2d2;
@@ -127,6 +142,24 @@ main .list-form .list-item:hover .label {
 main .list-form .list-item .text-checked {
   transition: all 0.6s;
   text-decoration: line-through;
+  color: #D8D8D8;
+}
+main .list-form .list-item .btn-prio {
+  scale: 0;
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.5s;
+}
+main .list-form .list-item .btn-prio-checked {
+  scale: 1;
+  color: red;
+}
+main .list-form .list-item:hover .btn-prio {
+  scale: 1;
 }
 main .btn-container {
   margin-top: 1rem;
