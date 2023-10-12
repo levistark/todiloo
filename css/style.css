@@ -163,6 +163,10 @@ main .list-form .list-item:hover .btn-prio {
 }
 main .btn-container {
   margin-top: 1rem;
+  max-width: 20rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 main .btn-container button {
   border: 0;
@@ -170,10 +174,13 @@ main .btn-container button {
   border-radius: 10px;
   background-color: #181818;
   color: white;
-  margin: 1rem;
+  margin: 1rem 0;
   transition: 0.3s;
   box-shadow: #979797 0px 5px 10px 1px;
 }
 main .btn-container button:hover {
   background-color: #41B883;
+}
+main .alert-save {
+  margin-top: 1rem;
 }

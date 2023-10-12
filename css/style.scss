@@ -194,6 +194,11 @@ main {
     }
     .btn-container {
         margin-top: 1rem;
+        max-width: 20rem;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        
 
         button {
             border: 0;
@@ -201,15 +206,16 @@ main {
             border-radius: 10px;
             background-color: #181818;
             color: white;
-            margin: 1rem;
+            margin: 1rem 0;
             transition: 0.3s;
             box-shadow: #979797 0px 5px 10px 1px;
 
             &:hover {
                 background-color: #41B883;
             }
-
         }
     }
-    
+    .alert-save {
+        margin-top: 1rem;
+    }
 }
