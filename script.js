@@ -6,8 +6,6 @@ let nextPrioIndex = 0;
 let isPrio = null
 let focusedRow = null
 
-
-
 // Initial EVENT listeners for existing items
 listForm.querySelectorAll('.list-item').forEach((listItem) => {
     const itemText = listItem.querySelector('.input-text')
@@ -139,7 +137,6 @@ function onCheck() {
             }
         })
     })
-
 }
 
 // Modify the "addPrio" function to accept an index parameter
@@ -163,47 +160,4 @@ function addPrio(index) {
             clickedButton.textContent = 'Prio!';
         }
     }
-}
-
-const formId = "list-form"; // ID of the form
-const form = document.getElementsByClassName(formId); // Get the form element
-const saveButton = document.querySelector('.btn-save'); // Select save button
-const alertSave = document.querySelector(".alert-save"); // Select alert display span
-const key = "SavedList"; // Key for storing data in localStorage
-
-// Load saved data on page load
-window.addEventListener('DOMContentLoaded', function () {
-    const savedData = localStorage.getItem(key);
-    if (savedData) {
-        form.innerHTML = savedData;
-    }
-});
-
-saveButton.onclick = event => {
-    event.preventDefault();
-    
-    // Retrieve and store the form's HTML content
-    const formHTML = form.innerHTML;
-    localStorage.setItem(key, formHTML);
-
-    const message = "Your list has been saved!";
-    displayAlert(message);
-}
-
-/**
- * This function displays a message on the page for 2 seconds
- * @param {String} message
- */
-const displayAlert = message => {
-    alertSave.innerText = message;
-    alertSave.style.display = "inline";
-
-    setTimeout(function () {
-        alertSave.style.display = "none";
-    }, 2000);
-}
-
-// Get the entire form's HTML content
-function getFormData() {
-    return form.innerHTML;
 }
