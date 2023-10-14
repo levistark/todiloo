@@ -6,7 +6,6 @@ let nextPrioIndex = 0;
 let isPrio = null
 let focusedRow = null
 
-// Initial EVENT listeners for existing items
 listForm.querySelectorAll('.list-item').forEach((listItem) => {
     const itemText = listItem.querySelector('.input-text')
     const label = listItem.querySelector('.label')
@@ -35,6 +34,38 @@ listForm.querySelectorAll('.list-item').forEach((listItem) => {
         focusedRow = listItem
     });
 });
+
+// Initial EVENT listeners for existing items
+function addEventListener() {
+    listForm.querySelectorAll('.list-item').forEach((listItem) => {
+        const itemText = listItem.querySelector('.input-text')
+        const label = listItem.querySelector('.label')
+    
+        // FOCUS state listener which controls the CSS classes
+        itemText.addEventListener('input', () => {
+            if (itemText.value.trim() !== '') {
+                label.classList.add('focused')
+    
+            } else {
+                label.classList.remove('focused')
+            }
+        });
+    
+        // Prevent form submission on Enter key press for EXISTING items
+        itemText.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault()
+                addRow()
+    
+            }
+        });
+    
+        // Set the INITIAL focused row when clicking on the input field
+        itemText.addEventListener('focus', () => {
+            focusedRow = listItem
+        });
+    });
+}
 
 // Function to add rows
 function addRow() {
@@ -102,10 +133,24 @@ function addRow() {
 
 // Function to clear rows
 function clearList() {
-    while (listForm.firstChild) {
-        listForm.innerHTML = ``
-    }
-    addRow()
+
+    listForm.innerHTML = ``
+    let defaultListItem = document.createElement('div')
+
+    defaultListItem.className = 'list-item'
+    defaultListItem.innerHTML = `
+        <label class="checkbox">
+            <input type="checkbox" />
+            <span></span>
+        </label>
+        <input required type="text" class="input-text">
+        <label class="label">To-do</label>
+        <button type="button" class="btn-prio" onclick="addPrio(0)">Prio?</button>
+    `
+    listForm.appendChild(defaultListItem)
+
+    nextPrioIndex = 0
+    addEventListener()
 }
 
 function deleteRow() {
