@@ -13,24 +13,8 @@ header {
         font-size: 45pt;
         font-weight: 800;
         letter-spacing: -4px;
-    }
-
-    .header-nav {
-        display: flex;
-        justify-content: end;
-        font-size: 14pt;
-
-        a {
-            color: black;
-            text-decoration: none;
-            
-            &:nth-child(2) {
-                margin: 0 5rem;
-            }
-            i {
-                font-size: 16pt;
-            }
-        }
+        color: black;
+        text-decoration: none;
     }
 }
 

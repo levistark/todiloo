@@ -14,21 +14,8 @@ header .header-logo {
   font-size: 45pt;
   font-weight: 800;
   letter-spacing: -4px;
-}
-header .header-nav {
-  display: flex;
-  justify-content: end;
-  font-size: 14pt;
-}
-header .header-nav a {
   color: black;
   text-decoration: none;
-}
-header .header-nav a:nth-child(2) {
-  margin: 0 5rem;
-}
-header .header-nav a i {
-  font-size: 16pt;
 }
 
 main {
