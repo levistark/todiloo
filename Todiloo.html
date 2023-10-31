@@ -17,28 +17,24 @@
     <body>
         <header class="header container">
             <span class="header-logo">todiloo .</span>            
-            <nav class="header-nav">
-                <a href="#my-lists">My Lists</a>
-                <a href="#sign-up"><i class="fa-solid fa-right-to-bracket"></i></a>
-            </nav>
         </header>
 
         <main class="main container">
 
             <h1 class="main-title">To-do List</h1>
                     
-                <form class="list-form" novalidate>
-                    <div class="list-item">
-                        <label class="checkbox">
-                            <input onclick="onCheck()" type="checkbox" />
-                            <span></span>
-                        </label>
-                        <input required type="text" class="input-text">
-                        <span class="text-checked"></span>
-                        <label class="label">To-do</label>
-                        <button type="button" class="btn-prio" onclick="addPrio(0)">Prio?</button>
-                    </div>
-                </form>
+            <form class="list-form" novalidate>
+                <div class="list-item">
+                    <label class="checkbox">
+                        <input onclick="onCheck()" type="checkbox" />
+                        <span></span>
+                    </label>
+                    <input required type="text" class="input-text">
+                    <span class="text-checked"></span>
+                    <label class="label">To-do</label>
+                    <button type="button" class="btn-prio" onclick="addPrio(0)">Prio?</button>
+                </div>
+            </form>
 
             <div class="btn-container">
                 <button class="addRow" onclick="addRow()">Add Row</button>
