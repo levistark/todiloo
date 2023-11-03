@@ -4,6 +4,18 @@ body {
   background-color: #f6f6f6;
 }
 
+.body-dark {
+  background-color: #282828;
+}
+
+.text-bright {
+  color: #e5e5e5 !important;
+}
+
+.no-shadow {
+  box-shadow: none !important;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -184,11 +196,70 @@ main .btn-container button {
   color: white;
   margin: 1rem 1rem;
   transition: 0.3s;
-  box-shadow: #979797 0px 5px 10px 1px;
+  box-shadow: #979797 0px 1px 10px 1px;
 }
 main .btn-container button:hover {
   background-color: #41B883;
 }
 main .alert-save {
   margin-top: 1rem;
+}
+main .switch-container {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Hide default HTML checkbox */
+  /* The slider */
+  /* Rounded sliders */
+}
+main .switch-container h5 {
+  font-size: 14pt;
+  font-weight: 400;
+}
+main .switch-container .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+main .switch-container .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+main .switch-container .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+main .switch-container .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+main .switch-container input:checked + .slider {
+  background-color: #41B883;
+}
+main .switch-container input:focus + .slider {
+  box-shadow: 0 0 1px #41B883;
+}
+main .switch-container input:checked + .slider:before {
+  transform: translateX(26px);
+}
+main .switch-container .slider.round {
+  border-radius: 34px;
+}
+main .switch-container .slider.round:before {
+  border-radius: 50%;
 }

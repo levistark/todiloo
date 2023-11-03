@@ -218,3 +218,35 @@ function addPrio(index) {
     }
 }
 
+function toggleDarkMode() {
+    if (document.querySelector('body').classList.contains('body-dark')) {
+        document.querySelector('body').classList.remove('body-dark')
+        document.querySelector('.header-logo').classList.remove('text-bright')
+        document.querySelector('.main-title').classList.remove('text-bright')
+        document.querySelector('.list-form').classList.remove('text-bright')
+        document.querySelector('.list-item').classList.remove('text-bright')
+        document.querySelector('.checkbox').classList.remove('text-bright')
+        document.querySelector('.input-text').classList.remove('text-bright')
+        document.querySelector('.text-checked').classList.remove('text-bright')
+        document.querySelector('.label').classList.remove('text-bright')
+        document.querySelector('.btn-prio').classList.remove('text-bright')
+        document.querySelector('.addRow').classList.remove('no-shadow')
+        document.querySelector('.clearList').classList.remove('no-shadow')
+        document.querySelector('h5').classList.remove('text-bright')
+    } else {
+        document.querySelector('body').classList.add('body-dark')
+        document.querySelector('.header-logo').classList.add('text-bright')
+        document.querySelector('.main-title').classList.add('text-bright')
+        document.querySelector('.list-form').classList.add('text-bright')
+        document.querySelector('.list-item').classList.add('text-bright')
+        document.querySelector('.checkbox').classList.add('text-bright')
+        document.querySelector('.input-text').classList.add('text-bright')
+        document.querySelector('.text-checked').classList.add('text-bright')
+        document.querySelector('.label').classList.add('text-bright')
+        document.querySelector('.btn-prio').classList.add('text-bright')
+        document.querySelector('h5').classList.add('text-bright')
+        document.querySelector('.addRow').classList.add('no-shadow')
+        document.querySelector('.clearList').classList.add('no-shadow')
+    }
+}
+
