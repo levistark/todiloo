@@ -2,7 +2,8 @@
 const listItems = document.querySelectorAll('.list-item')
 const listForm = document.querySelector('.list-form')
 const itemText = document.querySelector('.input-text')
-let nextPrioIndex = 0;
+let nextPrioIndex = 0
+let tabIndex = 0
 let isPrio = null
 let focusedRow = null
 
@@ -80,7 +81,7 @@ function addRow() {
             <input type="checkbox" />
             <span></span>
         </label>
-        <input required type="text" class="input-text">
+        <input required tabindex="${tabIndex+1}" type="text" class="input-text">
         <label class="label">To-do</label>
         <button type="button" class="btn-prio" onclick="addPrio(${nextPrioIndex+1})">Prio?</button>
     `
@@ -89,8 +90,9 @@ function addRow() {
     const prioButtons = document.querySelectorAll('.btn-prio');
 
 
-    // Increment the index for the next "Prio?" button
+    // Increment the index for the next "Prio?" button AND tabIndex
     nextPrioIndex++
+    tabIndex++
 
     // Attach the FOCUSED event listener to the newly created item to control CSS
     const newItemText = newItem.querySelector('.input-text');
@@ -146,7 +148,7 @@ function clearList() {
             <input onclick="onCheck()" type="checkbox" />
             <span></span>
         </label>
-        <input required type="text" class="input-text">
+        <input required tabindex="1" type="text" class="input-text">
         <span class="text-checked"></span>
         <label class="label">To-do</label>
         <button type="button" class="btn-prio" onclick="addPrio(0)">Prio?</button>
@@ -159,13 +161,13 @@ function deleteRow() {
 
     
     if (listForm.childNodes.length <= 3) {
-        // listForm.querySelector('.input-text').focus()
-        listForm.firstChild.focus()
+        listForm.querySelector('.input-text').focus()
     } else {
         focusedRow.remove()
         focusedRow = listForm.lastChild
         // Decrement the index for the previous "Prio?" button
         nextPrioIndex--
+        tabIndex--
 
         if (listForm.childNodes.length >= 4) {
             listForm.lastChild.querySelector('.input-text').focus()
