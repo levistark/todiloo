@@ -7,6 +7,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    justify-content: center;
     padding: 2rem;
 
     .header-logo {
@@ -24,12 +25,19 @@ main {
     flex-direction: column;
     align-items: center;
     padding: 3rem 0;
+    @media (max-width: 600px) {
+        padding: 0 2rem 0;
+    }
 
     .main-title {
         font-size: 45pt;
         font-weight: 800;
         letter-spacing: -4px;
         margin-bottom: 2rem;
+        @media (max-width: 500px) {
+            font-size: 40pt;
+        }
+        
     }
 
     .list-form {
@@ -136,6 +144,9 @@ main {
                 position: absolute;
                 margin-left: 2.7rem;
                 width: 90%;
+                @media (max-width: 575px) {
+                    width: 80%;
+                }
             }
             .input-text:focus:valid + .label {
                 top: -20px;
@@ -164,6 +175,12 @@ main {
             .btn-prio-checked {
                 scale: 1;
                 color: red;
+            }
+
+            .btn-prio-done {
+                transition: all 0.6s;
+                text-decoration: line-through;
+                color: #D8D8D8;
             }
 
             &:hover .btn-prio {

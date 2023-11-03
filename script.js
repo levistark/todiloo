@@ -126,9 +126,9 @@ function addRow() {
     checkBoxes.forEach((checkbox, index) => {
         checkbox.addEventListener('change', () => {
             if (checkbox.checked) {
-                inputTexts[index].classList.add('text-checked');
+                inputTexts[index].classList.add('text-checked')
             } else {
-                inputTexts[index].classList.remove('text-checked');
+                inputTexts[index].classList.remove('text-checked')
             }
         })
 
@@ -158,7 +158,6 @@ function clearList() {
 }
 
 function deleteRow() {
-
     
     if (listForm.childNodes.length <= 3) {
         listForm.querySelector('.input-text').focus()
@@ -176,19 +175,21 @@ function deleteRow() {
             listForm.querySelector('.input-text').focus()
         }
     }
-
 }
 
 function onCheck() {
     const inputTexts = document.querySelectorAll('.list-item input[type="text"]')
     const checkBoxes = document.querySelectorAll('.list-item input[type="checkbox"]')
+    const prioButtons = document.querySelectorAll('.btn-prio')
 
     checkBoxes.forEach((checkbox, index) => {
         checkbox.addEventListener('change', () => {
             if (checkbox.checked) {
-                inputTexts[index].classList.add('text-checked');
+                inputTexts[index].classList.add('text-checked')
+                prioButtons[index].classList.add('btn-prio-done')
             } else {
-                inputTexts[index].classList.remove('text-checked');
+                inputTexts[index].classList.remove('text-checked')
+                prioButtons[index].classList.remove('btn-prio-done')
             }
         })
     })

@@ -8,6 +8,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  justify-content: center;
   padding: 2rem;
 }
 header .header-logo {
@@ -24,11 +25,21 @@ main {
   align-items: center;
   padding: 3rem 0;
 }
+@media (max-width: 600px) {
+  main {
+    padding: 0 2rem 0;
+  }
+}
 main .main-title {
   font-size: 45pt;
   font-weight: 800;
   letter-spacing: -4px;
   margin-bottom: 2rem;
+}
+@media (max-width: 500px) {
+  main .main-title {
+    font-size: 40pt;
+  }
 }
 main .list-form .list-item {
   display: flex;
@@ -118,6 +129,11 @@ main .list-form .list-item .input-text {
   margin-left: 2.7rem;
   width: 90%;
 }
+@media (max-width: 575px) {
+  main .list-form .list-item .input-text {
+    width: 80%;
+  }
+}
 main .list-form .list-item .input-text:focus:valid + .label {
   top: -20px;
   color: #41B883;
@@ -144,6 +160,11 @@ main .list-form .list-item .btn-prio {
 main .list-form .list-item .btn-prio-checked {
   scale: 1;
   color: red;
+}
+main .list-form .list-item .btn-prio-done {
+  transition: all 0.6s;
+  text-decoration: line-through;
+  color: #D8D8D8;
 }
 main .list-form .list-item:hover .btn-prio {
   scale: 1;
