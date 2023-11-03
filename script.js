@@ -37,6 +37,10 @@ listForm.querySelectorAll('.list-item').forEach((listItem) => {
 
 // Initial EVENT listeners for existing items
 function addEventListener() {
+    nextPrioIndex = 0;
+    isPrio = null
+    focusedRow = null
+
     listForm.querySelectorAll('.list-item').forEach((listItem) => {
         const itemText = listItem.querySelector('.input-text')
         const label = listItem.querySelector('.label')
@@ -82,6 +86,9 @@ function addRow() {
     `
     listForm.appendChild(newItem)
 
+    const prioButtons = document.querySelectorAll('.btn-prio');
+
+
     // Increment the index for the next "Prio?" button
     nextPrioIndex++
 
@@ -105,7 +112,6 @@ function addRow() {
             addRow() 
 
         } else if(e.key === 'Backspace' && (newItemText.value.trim() == '') && focusedRow) {
-            e.preventDefault()
             deleteRow()
         }
     });
@@ -134,39 +140,41 @@ function addRow() {
 // Function to clear rows
 function clearList() {
 
-    listForm.innerHTML = ``
-    let defaultListItem = document.createElement('div')
-
-    defaultListItem.className = 'list-item'
-    defaultListItem.innerHTML = `
+    listForm.innerHTML = `
+    <div class="list-item">
         <label class="checkbox">
-            <input type="checkbox" />
+            <input onclick="onCheck()" type="checkbox" />
             <span></span>
         </label>
         <input required type="text" class="input-text">
+        <span class="text-checked"></span>
         <label class="label">To-do</label>
         <button type="button" class="btn-prio" onclick="addPrio(0)">Prio?</button>
+    </div>
     `
-    listForm.appendChild(defaultListItem)
-
-    nextPrioIndex = 0
     addEventListener()
 }
 
 function deleteRow() {
+
     
-    if (listForm.childNodes.length <= 1) {
-        listForm.querySelector('.input-text').focus()
+    if (listForm.childNodes.length <= 3) {
+        // listForm.querySelector('.input-text').focus()
+        listForm.firstChild.focus()
     } else {
         focusedRow.remove()
         focusedRow = listForm.lastChild
+        // Decrement the index for the previous "Prio?" button
+        nextPrioIndex--
 
         if (listForm.childNodes.length >= 4) {
             listForm.lastChild.querySelector('.input-text').focus()
+
         } else {
             listForm.querySelector('.input-text').focus()
         }
     }
+
 }
 
 function onCheck() {
@@ -206,3 +214,4 @@ function addPrio(index) {
         }
     }
 }
+
