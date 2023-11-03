@@ -74,11 +74,12 @@ function addEventListener() {
 
 // Function to add rows
 function addRow() {
+
     let newItem = document.createElement('div')
     newItem.className = 'list-item new-item'
     newItem.innerHTML = `
         <label class="checkbox">
-            <input type="checkbox" />
+            <input type="checkbox" onclick="onCheck()"/>
             <span></span>
         </label>
         <input required tabindex="${tabIndex+1}" type="text" class="input-text">
@@ -87,12 +88,48 @@ function addRow() {
     `
     listForm.appendChild(newItem)
 
-    const prioButtons = document.querySelectorAll('.btn-prio');
-
-
     // Increment the index for the next "Prio?" button AND tabIndex
     nextPrioIndex++
     tabIndex++
+    
+    // Handle CSS classes regarding dark/bright-mode for added items
+    // IF DARK
+    if (document.querySelector('body').classList.contains('body-dark')) {
+        document.querySelectorAll('.list-item').forEach((element) => {
+            element.classList.add('text-bright')
+        })
+        document.querySelectorAll('.checkbox').forEach((element) => {
+            element.classList.add('text-bright')
+        })
+        document.querySelectorAll('.input-text').forEach((element) => {
+            element.classList.add('text-bright')
+        })
+        document.querySelectorAll('.text-checked').forEach((element) => {
+            element.classList.add('text-bright')
+        })
+        document.querySelectorAll('.btn-prio').forEach((element ) => {
+            element.classList.add('text-bright')
+        })
+
+    // IF WHITE
+    } else {
+        document.querySelectorAll('.list-item').forEach((element) => {
+            element.classList.remove('text-bright')
+        })
+        document.querySelectorAll('.checkbox').forEach((element) => {
+            element.classList.remove('text-bright')
+        })
+        document.querySelectorAll('.input-text').forEach((element) => {
+            element.classList.remove('text-bright')
+        })
+        document.querySelectorAll('.text-checked').forEach((element) => {
+            element.classList.remove('text-bright')
+        })
+        document.querySelectorAll('.btn-prio').forEach((element ) => {
+            element.classList.remove('text-bright')
+        })
+    }
+
 
     // Attach the FOCUSED event listener to the newly created item to control CSS
     const newItemText = newItem.querySelector('.input-text');
@@ -131,7 +168,6 @@ function addRow() {
                 inputTexts[index].classList.remove('text-checked')
             }
         })
-
     })
 
     // Focus the newly created row
@@ -177,22 +213,49 @@ function deleteRow() {
     }
 }
 
+let checkedBoxes = []
+
 function onCheck() {
     const inputTexts = document.querySelectorAll('.list-item input[type="text"]')
     const checkBoxes = document.querySelectorAll('.list-item input[type="checkbox"]')
     const prioButtons = document.querySelectorAll('.btn-prio')
 
-    checkBoxes.forEach((checkbox, index) => {
-        checkbox.addEventListener('change', () => {
-            if (checkbox.checked) {
-                inputTexts[index].classList.add('text-checked')
-                prioButtons[index].classList.add('btn-prio-done')
-            } else {
-                inputTexts[index].classList.remove('text-checked')
-                prioButtons[index].classList.remove('btn-prio-done')
-            }
+    // Om bakgrunden är SVART
+    if (document.querySelector('body').classList.contains('body-dark')) {
+        checkBoxes.forEach((checkbox, index) => {
+            checkbox.addEventListener('change', () => {
+                // KRYSSAD
+                if (checkbox.checked) {
+                    inputTexts[index].classList.add('text-checked-dark')
+                    inputTexts[index].classList.remove('text-bright')
+                    prioButtons[index].classList.add('btn-prio-done-dark')
+                    prioButtons[index].classList.remove('text-bright')
+
+                // INTE KRYSSAD
+                } else {
+                    inputTexts[index].classList.remove('text-checked-dark')
+                    inputTexts[index].classList.add('text-bright')
+                    prioButtons[index].classList.remove('btn-prio-done-dark')
+                    prioButtons[index].classList.add('text-bright')
+                }
+            })
         })
-    })
+    // Om bakgrunden är VIT
+    } else {
+        checkBoxes.forEach((checkbox, index) => {
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    inputTexts[index].classList.add('text-checked')
+                    inputTexts[index].classList.remove('text-checked-dark')
+                    prioButtons[index].classList.add('btn-prio-done')
+                    prioButtons[index].classList.remove('btn-prio-done-dark')
+                } else {
+                    inputTexts[index].classList.remove('text-checked', 'text-bright')
+                    prioButtons[index].classList.remove('btn-prio-done', 'text-bright')
+                }
+            })
+        })
+    }
 }
 
 // Modify the "addPrio" function to accept an index parameter
@@ -219,34 +282,105 @@ function addPrio(index) {
 }
 
 function toggleDarkMode() {
+    const inputTexts = document.querySelectorAll('.list-item input[type="text"]')
+    const prioButtons = document.querySelectorAll('.btn-prio')
+
     if (document.querySelector('body').classList.contains('body-dark')) {
         document.querySelector('body').classList.remove('body-dark')
         document.querySelector('.header-logo').classList.remove('text-bright')
-        document.querySelector('.main-title').classList.remove('text-bright')
-        document.querySelector('.list-form').classList.remove('text-bright')
-        document.querySelector('.list-item').classList.remove('text-bright')
-        document.querySelector('.checkbox').classList.remove('text-bright')
-        document.querySelector('.input-text').classList.remove('text-bright')
-        document.querySelector('.text-checked').classList.remove('text-bright')
-        document.querySelector('.label').classList.remove('text-bright')
-        document.querySelector('.btn-prio').classList.remove('text-bright')
+        document.querySelector('h5').classList.remove('text-bright')
         document.querySelector('.addRow').classList.remove('no-shadow')
         document.querySelector('.clearList').classList.remove('no-shadow')
-        document.querySelector('h5').classList.remove('text-bright')
+
+        inputTexts.forEach((inputText, index) => {
+            inputTexts[index].classList.remove('text-bright')
+            prioButtons[index].classList.remove('text-bright')
+        })
+
     } else {
         document.querySelector('body').classList.add('body-dark')
         document.querySelector('.header-logo').classList.add('text-bright')
-        document.querySelector('.main-title').classList.add('text-bright')
-        document.querySelector('.list-form').classList.add('text-bright')
-        document.querySelector('.list-item').classList.add('text-bright')
-        document.querySelector('.checkbox').classList.add('text-bright')
-        document.querySelector('.input-text').classList.add('text-bright')
-        document.querySelector('.text-checked').classList.add('text-bright')
-        document.querySelector('.label').classList.add('text-bright')
-        document.querySelector('.btn-prio').classList.add('text-bright')
         document.querySelector('h5').classList.add('text-bright')
         document.querySelector('.addRow').classList.add('no-shadow')
         document.querySelector('.clearList').classList.add('no-shadow')
+
+        inputTexts.forEach((inputText, index) => {
+            inputTexts[index].classList.add('text-bright')
+            prioButtons[index].classList.add('text-bright')
+        })
+
     }
+
+    inputTexts.forEach((inputText, index) => {
+        // OM KRYSSAD OCH SVART
+        if (inputText.classList.contains('text-checked-dark')) {
+            console.log('OM KRYSSAD OCH SVART')
+
+            inputTexts[index].classList.remove('text-checked-dark')
+            inputTexts[index].classList.add('text-checked')
+            inputTexts[index].classList.remove('text-bright')
+
+            prioButtons[index].classList.remove('btn-prio-done-dark')
+            prioButtons[index].classList.add('btn-prio-done')
+            prioButtons[index].classList.remove('text-bright')
+
+        // OM KRYSSAD OCH VIT
+        } else if (inputText.classList.contains('text-checked')) {
+            console.log('OM KRYSSAD OCH VIT')
+
+            inputTexts[index].classList.remove('text-checked')
+            inputTexts[index].classList.add('text-checked-dark')
+            
+            prioButtons[index].classList.remove('btn-prio-done')
+            prioButtons[index].classList.add('btn-prio-done-dark')
+        } 
+    })
 }
 
+
+
+// else if (document.querySelector('body').classList.contains('body-dark')) {
+
+
+//     document.querySelector('body').classList.remove('body-dark')
+//     document.querySelector('.header-logo').classList.remove('text-bright')
+//     document.querySelector('.list-form').classList.remove('text-bright')
+//     document.querySelectorAll('.list-item').forEach((element) => {
+//         element.classList.remove('text-bright') 
+//      })
+//      document.querySelectorAll('.checkbox').forEach((element) => {
+//         element.classList.remove('text-bright') 
+//      })
+//      document.querySelectorAll('.input-text').forEach((element) => {
+//         element.classList.remove('text-bright') 
+//      })
+//      document.querySelectorAll('.text-checked').forEach((element) => {
+//         element.classList.remove('text-bright') 
+//      })
+//      document.querySelectorAll('.btn-prio').forEach((element) => {
+//         element.classList.remove('text-bright') 
+//      })
+//     document.querySelector('.addRow').classList.remove('no-shadow')
+//     document.querySelector('.clearList').classList.remove('no-shadow')
+//     document.querySelector('h5').classList.remove('text-bright')
+// } else {
+//     document.querySelector('body').classList.add('body-dark')
+//     document.querySelector('.header-logo').classList.add('text-bright')
+//     document.querySelector('.list-form').classList.add('text-bright')
+//     document.querySelectorAll('.list-item').forEach((element) => {
+//        element.classList.add('text-bright') 
+//     })
+//     document.querySelectorAll('.checkbox').forEach((element) => {
+//        element.classList.add('text-bright') 
+//     })
+//     document.querySelectorAll('.input-text').forEach((element) => {
+//        element.classList.add('text-bright') 
+//     })
+//     document.querySelectorAll('.text-checked').forEach((element) => {
+//        element.classList.add('text-bright') 
+//     })
+//     document.querySelectorAll('.btn-prio').forEach((element) => {
+//        element.classList.add('text-bright') 
+//     })
+//     document.querySelector('h5').classList.add('text-bright')
+// }
