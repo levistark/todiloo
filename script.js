@@ -178,21 +178,38 @@ function addRow() {
 // Function to clear rows
 function clearList() {
 
-    listForm.innerHTML = `
-    <div class="list-item">
-        <label class="checkbox">
-            <input onclick="onCheck()" type="checkbox" />
-            <span></span>
-        </label>
-        <input required tabindex="1" type="text" class="input-text">
-        <span class="text-checked"></span>
-        <label class="label">To-do</label>
-        <button type="button" class="btn-prio" onclick="addPrio(0)">Prio?</button>
-    </div>
-    `
+    if (document.querySelector('body').classList.contains('body-dark')) {
+        listForm.innerHTML = `
+        <div class="list-item">
+            <label class="checkbox">
+                <input onclick="onCheck()" type="checkbox" />
+                <span></span>
+            </label>
+            <input required tabindex="1" type="text" class="input-text text-bright">
+            <span class="text-checked"></span>
+            <label class="label">To-do...</label>
+            <button type="button" class="btn-prio text-bright" onclick="addPrio(0)">Prio?</button>
+        </div>
+        `
+    } else {
+        listForm.innerHTML = `
+        <div class="list-item">
+            <label class="checkbox">
+                <input onclick="onCheck()" type="checkbox" />
+                <span></span>
+            </label>
+            <input required tabindex="1" type="text" class="input-text">
+            <span class="text-checked"></span>
+            <label class="label">To-do...</label>
+            <button type="button" class="btn-prio" onclick="addPrio(0)">Prio?</button>
+        </div>
+        `
+    }
+
     addEventListener()
 }
 
+// Function to delete rows
 function deleteRow() {
     
     if (listForm.childNodes.length <= 3) {
@@ -213,8 +230,7 @@ function deleteRow() {
     }
 }
 
-let checkedBoxes = []
-
+// Function to handle the checkbox event
 function onCheck() {
     const inputTexts = document.querySelectorAll('.list-item input[type="text"]')
     const checkBoxes = document.querySelectorAll('.list-item input[type="checkbox"]')
@@ -257,7 +273,6 @@ function onCheck() {
         })
     }
 }
-
 // Modify the "addPrio" function to accept an index parameter
 function addPrio(index) {
     const prioButtons = document.querySelectorAll('.btn-prio');
@@ -281,6 +296,7 @@ function addPrio(index) {
     }
 }
 
+// Function to handle dark- / light mode toggle
 function toggleDarkMode() {
     const inputTexts = document.querySelectorAll('.list-item input[type="text"]')
     const prioButtons = document.querySelectorAll('.btn-prio')
@@ -308,7 +324,6 @@ function toggleDarkMode() {
             inputTexts[index].classList.add('text-bright')
             prioButtons[index].classList.add('text-bright')
         })
-
     }
 
     inputTexts.forEach((inputText, index) => {
@@ -330,57 +345,12 @@ function toggleDarkMode() {
 
             inputTexts[index].classList.remove('text-checked')
             inputTexts[index].classList.add('text-checked-dark')
+            inputTexts[index].classList.remove('text-bright')
             
             prioButtons[index].classList.remove('btn-prio-done')
             prioButtons[index].classList.add('btn-prio-done-dark')
+            prioButtons[index].classList.remove('text-bright')
+
         } 
     })
 }
-
-
-
-// else if (document.querySelector('body').classList.contains('body-dark')) {
-
-
-//     document.querySelector('body').classList.remove('body-dark')
-//     document.querySelector('.header-logo').classList.remove('text-bright')
-//     document.querySelector('.list-form').classList.remove('text-bright')
-//     document.querySelectorAll('.list-item').forEach((element) => {
-//         element.classList.remove('text-bright') 
-//      })
-//      document.querySelectorAll('.checkbox').forEach((element) => {
-//         element.classList.remove('text-bright') 
-//      })
-//      document.querySelectorAll('.input-text').forEach((element) => {
-//         element.classList.remove('text-bright') 
-//      })
-//      document.querySelectorAll('.text-checked').forEach((element) => {
-//         element.classList.remove('text-bright') 
-//      })
-//      document.querySelectorAll('.btn-prio').forEach((element) => {
-//         element.classList.remove('text-bright') 
-//      })
-//     document.querySelector('.addRow').classList.remove('no-shadow')
-//     document.querySelector('.clearList').classList.remove('no-shadow')
-//     document.querySelector('h5').classList.remove('text-bright')
-// } else {
-//     document.querySelector('body').classList.add('body-dark')
-//     document.querySelector('.header-logo').classList.add('text-bright')
-//     document.querySelector('.list-form').classList.add('text-bright')
-//     document.querySelectorAll('.list-item').forEach((element) => {
-//        element.classList.add('text-bright') 
-//     })
-//     document.querySelectorAll('.checkbox').forEach((element) => {
-//        element.classList.add('text-bright') 
-//     })
-//     document.querySelectorAll('.input-text').forEach((element) => {
-//        element.classList.add('text-bright') 
-//     })
-//     document.querySelectorAll('.text-checked').forEach((element) => {
-//        element.classList.add('text-bright') 
-//     })
-//     document.querySelectorAll('.btn-prio').forEach((element) => {
-//        element.classList.add('text-bright') 
-//     })
-//     document.querySelector('h5').classList.add('text-bright')
-// }
