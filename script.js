@@ -93,25 +93,38 @@ function addRow() {
     tabIndex++
     
     // Handle CSS classes regarding dark/bright-mode for added items
-    // IF DARK
+
+    // Add onCheck-listener to the checkbox in the new list item
+    const inputTexts = document.querySelectorAll('.list-item input[type="text"]')
+    const checkBoxes = document.querySelectorAll('.list-item input[type="checkbox"]')
+    const prioButtons = document.querySelectorAll('.btn-prio')
+
+
+    // IF DARK BG
     if (document.querySelector('body').classList.contains('body-dark')) {
         document.querySelectorAll('.list-item').forEach((element) => {
-            element.classList.add('text-bright')
+            if (!element.classList.contains('text-checked-dark')) {
+                element.classList.add('text-bright')
+            } 
         })
         document.querySelectorAll('.checkbox').forEach((element) => {
-            element.classList.add('text-bright')
-        })
+            if (!element.classList.contains('text-checked-dark')) {
+                element.classList.add('text-bright')
+            }         })
         document.querySelectorAll('.input-text').forEach((element) => {
-            element.classList.add('text-bright')
-        })
+            if (!element.classList.contains('text-checked-dark')) {
+                element.classList.add('text-bright')
+            }         })
         document.querySelectorAll('.text-checked').forEach((element) => {
-            element.classList.add('text-bright')
-        })
+            if (!element.classList.contains('text-checked-dark')) {
+                element.classList.add('text-bright')
+            }         })
         document.querySelectorAll('.btn-prio').forEach((element ) => {
-            element.classList.add('text-bright')
-        })
+            if (!element.classList.contains('btn-prio-done-dark')) {
+                element.classList.add('text-bright')
+            }         })
 
-    // IF WHITE
+    // IF WHITE BG
     } else {
         document.querySelectorAll('.list-item').forEach((element) => {
             element.classList.remove('text-bright')
@@ -155,10 +168,6 @@ function addRow() {
         }
     });
 
-
-    // Add onCheck-listener to the checkbox in the new list item
-    const inputTexts = document.querySelectorAll('.list-item input[type="text"]')
-    const checkBoxes = document.querySelectorAll('.list-item input[type="checkbox"]')
 
     checkBoxes.forEach((checkbox, index) => {
         checkbox.addEventListener('change', () => {
