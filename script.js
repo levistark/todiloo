@@ -83,7 +83,7 @@ function addRow() {
             <span></span>
         </label>
         <input required tabindex="${tabIndex+1}" type="text" class="input-text">
-        <label class="label">To-do</label>
+        <label class="label">To-do...</label>
         <button type="button" class="btn-prio" onclick="addPrio(${nextPrioIndex+1})">Prio?</button>
     `
     listForm.appendChild(newItem)
